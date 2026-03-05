@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import java.util.List;
 
-import com.example.demo.mapper.TodoMapper;
 import com.example.demo.model.Todo;
 import com.example.demo.service.TodoService;
 
@@ -17,17 +16,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/todo")
 public class TodoController {
 
-    private final TodoMapper todoMapper;
     private final TodoService todoService;
 
-    public TodoController(TodoMapper todoMapper, TodoService todoService) {
-        this.todoMapper = todoMapper;
+    public TodoController(TodoService todoService) {
         this.todoService = todoService;
     }
 
     @GetMapping
     public String list(Model model) {
-        List<Todo> todoList = todoMapper.findAll();
+        List<Todo> todoList = todoService.findAll();
         model.addAttribute("todoList", todoList);
         return "todo/list";
     }
