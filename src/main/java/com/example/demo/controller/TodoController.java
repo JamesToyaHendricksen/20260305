@@ -93,6 +93,15 @@ public class TodoController {
         return "redirect:/todo";
     }
 
+    @PostMapping("/{id}/toggle")
+    public String toggle(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        boolean toggled = todoService.toggleCompleted(id);
+        if (!toggled) {
+            redirectAttributes.addFlashAttribute("errorMessage", "\u66f4\u65b0\u306b\u5931\u6557\u3057\u307e\u3057\u305f");
+        }
+        return "redirect:/todo";
+    }
+
     @PostMapping("/{id}/delete")
     public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         try {
