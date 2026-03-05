@@ -36,7 +36,10 @@
                         <span th:unless="${todo.completed}">&#26410;&#23436;&#20102;</span>
                     </td>
                     <td class="text-center">
-                        <form th:action="@{/todo/{id}/delete(id=${todo.id})}" method="post" class="d-inline">
+                        <form th:action="@{/todo/{id}/delete(id=${todo.id})}"
+                              method="post"
+                              class="d-inline"
+                              onsubmit="return confirm('本当に削除しますか？');">
                             <button type="submit" class="btn btn-danger btn-sm">&#21066;&#38500;</button>
                         </form>
                     </td>
