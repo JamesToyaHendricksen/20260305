@@ -42,6 +42,12 @@ public class TodoController {
 
     @GetMapping("/complete")
     public String complete() {
+        return "redirect:/todo/new";
+    }
+
+    @PostMapping("/complete")
+    public String complete(@RequestParam("title") String title, Model model) {
+        model.addAttribute("title", title);
         return "todo/complete";
     }
 

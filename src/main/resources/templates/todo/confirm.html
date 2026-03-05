@@ -11,18 +11,20 @@
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-6">
             <h1 class="h4 mb-4">&#30331;&#37682;&#20869;&#23481;&#12398;&#30906;&#35469;</h1>
-
-            <div class="card shadow-sm mb-4">
-                <div class="card-body">
-                    <h2 class="h6 text-muted mb-2">Title</h2>
-                    <p class="mb-0 fs-5" th:text="${title}">&#12469;&#12531;&#12503;&#12523;&#12479;&#12473;&#12463;</p>
+            <form th:action="@{/todo/complete}" method="post">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h2 class="h6 text-muted mb-2">Title</h2>
+                        <input type="text" class="form-control" th:value="${title}" readonly>
+                        <input type="hidden" name="title" th:value="${title}">
+                    </div>
                 </div>
-            </div>
 
-            <div class="d-flex gap-2">
-                <a th:href="@{/todo/complete}" class="btn btn-primary">&#30331;&#37682;</a>
-                <a th:href="@{/todo/new}" class="btn btn-outline-secondary">&#25147;&#12427;</a>
-            </div>
+                <div class="d-flex gap-2">
+                    <a href="javascript:history.back();" class="btn btn-outline-secondary">&#25147;&#12427;</a>
+                    <button type="submit" class="btn btn-primary">&#30331;&#37682;</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
