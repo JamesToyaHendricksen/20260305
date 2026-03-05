@@ -2,6 +2,9 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import com.example.demo.mapper.TodoMapper;
+import com.example.demo.model.Todo;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,13 +16,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/todo")
 public class TodoController {
 
+    private final TodoMapper todoMapper;
+
+    public TodoController(TodoMapper todoMapper) {
+        this.todoMapper = todoMapper;
+    }
+
     @GetMapping
     public String list(Model model) {
-        List<TodoView> todoList = List.of(
-                new TodoView(1L, "Learn Spring Boot", "TODO"),
-                new TodoView(2L, "Create todo list page", "DOING"),
-                new TodoView(3L, "Tune screen style", "DONE"));
-
+        List<Todo> todoList = todoMapper.findAll();
         model.addAttribute("todoList", todoList);
         return "todo/list";
     }
@@ -47,10 +52,8 @@ public class TodoController {
 
     @PostMapping("/complete")
     public String complete(@RequestParam("title") String title, Model model) {
+        todoMapper.insert(title);
         model.addAttribute("title", title);
         return "todo/complete";
-    }
-
-    private record TodoView(Long id, String title, String status) {
     }
 }

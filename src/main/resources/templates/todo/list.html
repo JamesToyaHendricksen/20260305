@@ -30,7 +30,7 @@
                 <tr th:each="todo : ${todoList}">
                     <td class="text-center" th:text="${todo.id}">1</td>
                     <td th:text="${todo.title}">Sample todo</td>
-                    <td th:text="${todo.status}">TODO</td>
+                    <td th:text="${todo.completed} ? 'DONE' : 'TODO'">TODO</td>
                 </tr>
                 </tbody>
             </table>
