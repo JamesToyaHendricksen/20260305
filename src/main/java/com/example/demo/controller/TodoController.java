@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.demo.mapper.TodoMapper;
 import com.example.demo.model.Todo;
+import com.example.demo.service.TodoService;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class TodoController {
 
     private final TodoMapper todoMapper;
+    private final TodoService todoService;
 
-    public TodoController(TodoMapper todoMapper) {
+    public TodoController(TodoMapper todoMapper, TodoService todoService) {
         this.todoMapper = todoMapper;
+        this.todoService = todoService;
     }
 
     @GetMapping
@@ -51,12 +54,8 @@ public class TodoController {
     }
 
     @PostMapping("/complete")
-    public String complete(@RequestParam("title") String title, Model model) {
-        Todo todo = new Todo();
-        todo.setTitle(title);
-        todo.setCompleted(false);
-        todoMapper.insert(todo);
-        model.addAttribute("title", title);
-        return "todo/complete";
+    public String complete(@RequestParam("title") String title) {
+        todoService.create(title);
+        return "redirect:/todo";
     }
 }
