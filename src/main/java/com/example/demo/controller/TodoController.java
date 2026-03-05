@@ -52,7 +52,10 @@ public class TodoController {
 
     @PostMapping("/complete")
     public String complete(@RequestParam("title") String title, Model model) {
-        todoMapper.insert(title);
+        Todo todo = new Todo();
+        todo.setTitle(title);
+        todo.setCompleted(false);
+        todoMapper.insert(todo);
         model.addAttribute("title", title);
         return "todo/complete";
     }
