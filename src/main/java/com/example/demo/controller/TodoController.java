@@ -24,8 +24,8 @@ public class TodoController {
 
     @GetMapping
     public String list(Model model) {
-        List<Todo> todoList = todoService.findAll();
-        model.addAttribute("todoList", todoList);
+        List<Todo> todos = todoService.findAll();
+        model.addAttribute("todos", todos);
         return "todo/list";
     }
 

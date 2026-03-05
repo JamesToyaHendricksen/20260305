@@ -24,13 +24,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:if="${#lists.isEmpty(todoList)}">
+                <tr th:if="${#lists.isEmpty(todos)}">
                     <td colspan="3" class="text-center text-muted py-4">No todos found</td>
                 </tr>
-                <tr th:each="todo : ${todoList}">
+                <tr th:each="todo : ${todos}">
                     <td class="text-center" th:text="${todo.id}">1</td>
                     <td th:text="${todo.title}">Sample todo</td>
-                    <td th:text="${todo.completed} ? 'DONE' : 'TODO'">TODO</td>
+                    <td th:text="${todo.completed} ? '完了' : '未完了'">未完了</td>
                 </tr>
                 </tbody>
             </table>
