@@ -13,6 +13,15 @@
         <a th:href="@{/todo/new}" class="btn btn-primary">&#26032;&#35215;&#30331;&#37682;</a>
     </div>
 
+    <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show flash-alert" role="alert">
+        <span th:text="${successMessage}">Success</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show flash-alert" role="alert">
+        <span th:text="${errorMessage}">Error</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
     <div class="card shadow-sm">
         <div class="card-body p-0">
             <table class="table table-striped table-hover mb-0">
@@ -21,7 +30,7 @@
                     <th scope="col" class="text-center" style="width: 100px;">ID</th>
                     <th scope="col">&#12479;&#12452;&#12488;&#12523;</th>
                     <th scope="col" style="width: 160px;">&#23436;&#20102;&#29366;&#24907;</th>
-                    <th scope="col" class="text-center" style="width: 120px;">&#25805;&#20316;</th>
+                    <th scope="col" class="text-center" style="width: 180px;">&#25805;&#20316;</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -36,12 +45,15 @@
                         <span th:unless="${todo.completed}">&#26410;&#23436;&#20102;</span>
                     </td>
                     <td class="text-center">
-                        <form th:action="@{/todo/{id}/delete(id=${todo.id})}"
-                              method="post"
-                              class="d-inline"
-                              onsubmit="return confirm('本当に削除しますか？');">
-                            <button type="submit" class="btn btn-danger btn-sm">&#21066;&#38500;</button>
-                        </form>
+                        <div class="d-flex justify-content-center gap-1">
+                            <a th:href="@{/todo/{id}/edit(id=${todo.id})}" class="btn btn-outline-primary btn-sm">&#32232;&#38598;</a>
+                            <form th:action="@{/todo/{id}/delete(id=${todo.id})}"
+                                  method="post"
+                                  class="d-inline"
+                                  onsubmit="return confirm('&#26412;&#24403;&#12395;&#21066;&#38500;&#12375;&#12414;&#12377;&#12363;&#65311;');">
+                                <button type="submit" class="btn btn-danger btn-sm">&#21066;&#38500;</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 </tbody>
@@ -50,5 +62,13 @@
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>
+    setTimeout(function () {
+        document.querySelectorAll('.flash-alert').forEach(function (el) {
+            var alert = bootstrap.Alert.getOrCreateInstance(el);
+            alert.close();
+        });
+    }, 3000);
+</script>
 </body>
 </html>

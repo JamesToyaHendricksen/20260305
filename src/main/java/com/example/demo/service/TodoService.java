@@ -20,6 +20,10 @@ public class TodoService {
         return todoMapper.findAll();
     }
 
+    public Todo findById(Long id) {
+        return todoMapper.findById(id);
+    }
+
     public void create(String title) {
         Todo todo = new Todo();
         todo.setTitle(title);
@@ -27,7 +31,7 @@ public class TodoService {
         todoMapper.insert(todo);
     }
 
-    public void deleteById(Long id) {
-        todoMapper.deleteById(id);
+    public boolean deleteById(Long id) {
+        return todoMapper.deleteById(id) > 0;
     }
 }

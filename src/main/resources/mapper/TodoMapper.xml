@@ -21,4 +21,10 @@
         WHERE id = #{id}
     </delete>
 
+
+    <select id="findById" parameterType="long" resultType="com.example.demo.model.Todo">
+        SELECT id, title, completed
+        FROM todos
+        WHERE id = #{id}
+    </select>
 </mapper>
