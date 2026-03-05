@@ -29,6 +29,11 @@ public class TodoController {
         return "todo/form";
     }
 
+    @GetMapping("/form")
+    public String form() {
+        return "todo/form";
+    }
+
     @PostMapping("/confirm")
     public String confirm(@RequestParam("title") String title, Model model) {
         model.addAttribute("title", title);
